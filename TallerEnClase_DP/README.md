@@ -12,6 +12,8 @@ Este modelo se enfoca en tres aspectos clave:
 
 En resumen, la defensa en profundidad busca crear un **escudo multicapa y redundante** que dificulte el avance de un atacante, le dé tiempo a la organización para detectar y responder a la amenaza, y minimice el impacto en caso de una brecha en alguna de las capas.
 
+![](DP.png)
+
 ---
 **Trabajo en Grupo**
 
