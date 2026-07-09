@@ -8,7 +8,7 @@ Es una herramienta de código abierto y es fundamental en investigaciones polici
 
 
 **Manual Oficial**
-📖📖📖📖📖📖📖📖
+
 - https://sleuthkit.org/autopsy/docs/user-docs/4.23.0/
 
   
