@@ -708,3 +708,161 @@ Clasificar el resultado con un nivel de confianza:
 * En entornos corporativos, integrar análisis de metadatos, DLP, sandboxing y monitoreo de anomalías.
 
 La esteganografía es una disciplina útil para comprender cómo se puede ocultar información en medios digitales, pero su valor profesional depende de un uso ético, controlado y verificable.
+
+---
+
+# Manual de uso de OpenStego con ejercicio práctico
+
+## Propósito
+
+OpenStego es una herramienta de código abierto para esteganografía que ofrece dos funciones principales: ocultación de datos dentro de archivos portadores, como imágenes, y marcas de agua invisibles para verificación de copia o autenticidad. [openstego](https://www.openstego.com/index.html)
+
+Este manual explica el uso básico de OpenStego en modo gráfico y por línea de comandos, e incluye una **solicitud de ejercicio** lista para aplicar en un laboratorio académico o de ciberseguridad. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+## Requisitos previos
+
+Antes de comenzar, conviene contar con lo siguiente:
+
+- OpenStego descargado desde su sitio oficial. [openstego](https://www.openstego.com/index.html)
+- Un archivo a ocultar, por ejemplo `secreto.txt`. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+- Una imagen portadora en formato compatible, por ejemplo PNG o JPEG. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+- Un entorno autorizado de práctica, ya que la esteganografía debe usarse con fines legítimos, educativos o de protección de información.
+
+## Funciones principales
+
+Según la documentación oficial en español, OpenStego trabaja en dos modos:
+
+- **Ocultación de datos:** permite insertar un archivo dentro de una imagen y luego extraerlo. [openstego](https://www.openstego.com/index.html)
+- **Marcas de agua (beta):** permite generar una firma invisible, incrustarla en archivos y verificarla después. [openstego](https://www.openstego.com/index.html)
+
+## Uso en interfaz gráfica
+
+La documentación oficial indica que el modo de ocultación de datos permite tanto esconder un archivo dentro de una imagen como extraerlo posteriormente. [openstego](https://www.openstego.com/index.html)
+
+### Ocultar un archivo en una imagen
+
+1. Abrir OpenStego y seleccionar el modo de **ocultación de datos**. [openstego](https://www.openstego.com/index.html)
+2. En **Message File**, elegir el archivo que se desea ocultar. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+3. En **Cover File**, seleccionar la imagen portadora. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+4. En **Output Stego File**, indicar el nombre y la ruta del archivo de salida. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+5. Opcionalmente definir una contraseña para proteger el contenido oculto. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+6. Ejecutar la acción de **Hide Data** para generar la imagen esteganográfica. [openstego](https://www.openstego.com/index.html)
+
+### Extraer el archivo oculto
+
+1. Abrir OpenStego y seleccionar la opción de **extracción de datos**. [openstego](https://www.openstego.com/index.html)
+2. Elegir el archivo esteganográfico generado previamente. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+3. Definir la carpeta de salida para el archivo recuperado. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+4. Ingresar la contraseña si el contenido fue cifrado. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+5. Ejecutar la opción de extracción para recuperar el archivo original. [openstego](https://www.openstego.com/index.html)
+
+## Uso por línea de comandos
+
+La sintaxis general documentada para OpenStego es `java -jar <path>\\openstego.jar <command> [options]`. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+Los comandos principales disponibles son `embed` para incrustar datos, `extract` para extraerlos, `gensig` para generar firmas, `embedmark` para incrustar marcas de agua y `checkmark` para verificarlas. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+### Comandos básicos
+
+**Ocultar un archivo** dentro de una imagen:
+
+```bash
+java -jar openstego.jar embed -a randomlsb -mf secreto.txt -cf portada.png -sf salida.png
+```
+
+Este comando usa `embed` para insertar un archivo de mensaje (`-mf`) en un archivo portador (`-cf`) y guardar el resultado como archivo estego (`-sf`). El algoritmo puede definirse con `-a`, y la documentación muestra `randomlsb` como ejemplo para ocultación. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+**Extraer un archivo** desde la imagen generada:
+
+```bash
+java -jar openstego.jar extract -a randomlsb -sf salida.png -xd recuperado/
+```
+
+Aquí, `-sf` indica el archivo con datos ocultos y `-xd` la carpeta donde se extraerá el contenido. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+**Generar una firma** para marcas de agua:
+
+```bash
+java -jar openstego.jar gensig -a dwtdugad -gf firma.sig
+```
+
+**Insertar una marca de agua**:
+
+```bash
+java -jar openstego.jar embedmark -a dwtdugad -gf firma.sig -cf imagen.png -sf imagen_marcada.png
+```
+
+**Verificar la marca de agua**:
+
+```bash
+java -jar openstego.jar checkmark -a dwtdugad -gf firma.sig -sf imagen_marcada.png
+```
+
+La documentación oficial muestra estos comandos como ejemplos de operación para el modo CLI. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+## Parámetros útiles
+
+| Parámetro | Uso | Descripción |
+|---|---|---|
+| `-mf` | Ocultación | Archivo del mensaje o dato a insertar. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-cf` | Ocultación / marca | Archivo portador donde se incrusta la información. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-sf` | Ocultación / extracción / marca | Archivo de salida o archivo estego según el comando. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-xd` | Extracción | Directorio de salida para extraer el contenido. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-p` | Cifrado / extracción | Contraseña para cifrar o descifrar datos. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-A` | Cifrado | Algoritmo criptográfico, por defecto `AES128`; también puede usarse `AES256` si el entorno Java lo soporta. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-c` / `-C` | Ocultación | Habilita o deshabilita la compresión del mensaje antes de incrustarlo. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-e` / `-E` | Ocultación | Habilita o deshabilita el cifrado antes de incrustar el mensaje. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+| `-b` | RandomLSB | Define el máximo de bits usados por canal de color; el valor por defecto es 3. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk) |
+
+## Buenas prácticas
+
+- Utilizar imágenes portadoras de tamaño suficiente para evitar fallos al incrustar archivos grandes, especialmente cuando se trabaja con algoritmos como RandomLSB. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+- Proteger con contraseña los mensajes sensibles cuando se requiera confidencialidad. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+- Verificar siempre la recuperación del archivo oculto después de generar la imagen estego, para confirmar integridad del ejercicio.
+- Trabajar solo con archivos propios o con materiales autorizados para laboratorio, docencia o investigación.
+
+## Solicitud de ejercicio
+
+### Enunciado
+
+Realizar una práctica de esteganografía con OpenStego en un entorno de laboratorio controlado. La actividad debe demostrar la capacidad de ocultar información en una imagen, extraerla correctamente y documentar evidencias del proceso. [openstego](https://www.openstego.com/index.html)
+
+### Objetivo
+
+Ocultar un archivo de texto dentro de una imagen portadora utilizando OpenStego, recuperar el archivo oculto y comprobar que su contenido coincide con el original. [openstego](https://www.openstego.com/index.html)
+
+### Materiales
+
+- OpenStego instalado. [openstego](https://www.openstego.com/index.html)
+- Un archivo `mensaje.txt` con una nota de prueba.
+- Una imagen portadora `portada.png`.
+- Carpeta de evidencias para capturas de pantalla y resultados.
+
+### Instrucciones del ejercicio
+
+1. Crear un archivo `mensaje.txt` con un texto corto de prueba.
+2. Seleccionar una imagen portadora en formato PNG o JPEG. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+3. Usar OpenStego para ocultar `mensaje.txt` dentro de la imagen y generar `resultado.png`. [openstego](https://www.openstego.com/index.html)
+4. Configurar una contraseña durante el proceso de ocultación. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+5. Extraer el contenido desde `resultado.png` a una carpeta nueva. [openstego](https://www.openstego.com/index.html)
+6. Comparar el archivo extraído con el archivo original.
+7. Tomar capturas de pantalla del proceso.
+8. Entregar una breve evidencia técnica con comandos o pasos realizados, archivos usados y resultado obtenido.
+
+### Entregables esperados
+
+- Archivo original `mensaje.txt`.
+- Imagen portadora usada.
+- Imagen esteganográfica generada.
+- Archivo extraído.
+- Evidencia en PDF o documento con capturas y explicación del procedimiento.
+
+## Ejemplo de desarrollo
+
+Un ejemplo mínimo por consola sería ocultar `secret.txt` en `wallpaper.png` y generar `test.png` con el comando `embed`; la documentación oficial muestra precisamente este flujo como ejemplo de uso. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+Después, el archivo puede recuperarse con `extract` indicando el directorio de salida, por ejemplo `/data`, tal como aparece en la guía oficial de línea de comandos. [youtube](https://www.youtube.com/watch?v=ij5Qvpq5Erk)
+
+## Alcance ético
+
+La esteganografía puede utilizarse para privacidad, protección de propiedad intelectual y ejercicios de seguridad, pero también puede ser abusada para ocultar información maliciosa, por lo que su enseñanza debe desarrollarse exclusivamente en entornos autorizados y con fines legítimos. [openstego](https://www.openstego.com/index.html)
